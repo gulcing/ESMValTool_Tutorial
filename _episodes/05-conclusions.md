@@ -74,7 +74,7 @@ There are lots of resources available for helping you use ESMValTool.
 The ESMValTool [Discussions page](https://github.com/ESMValGroup/ESMValTool/discussions)
 is a good place to learn about general issues, or to see if your question has
  been already addressed.
-If you have a GitHub account, you can check previously created [issues](https://github.com/ESMValGroup/ESMValTool/issues) or create a new issue yourself (https://github.com/ESMValGroup/ESMValTool/issues/new/choose).
+If you have a GitHub account, you can check previously created [issues](https://github.com/ESMValGroup/ESMValTool/issues) or create a [new issue] (https://github.com/ESMValGroup/ESMValTool/issues/new/choose)yourself.
 
 Note that you will need a GitHub account for this.
 
