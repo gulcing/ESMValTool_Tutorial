@@ -126,119 +126,113 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 
 >## See the recipe_python.yml
 >
-> ```yaml
-> # ESMValTool
-> # recipe_python.yml
-  # See https://docs.esmvaltool.org/en/latest/recipes/recipe_examples.html
-  # for a description of this recipe.
-  # See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/overview.html
-  # for a description of the recipe format.
-> ---
-> documentation:
->   description: |
->     Example recipe that plots a map and timeseries of temperature.
->
->   title: Recipe that runs an example diagnostic written in Python.
->
->   authors:
->     - andela_bouwe
->     - righi_mattia
->
->   maintainer:
->     - schlund_manuel
->
->   references:
->     - acknow_project
->
->   projects:
->     - esmval
->     - c3s-magic
->
-> datasets:
->   - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn}
->   - {dataset: bcc-csm1-1, version: v1,  project: CMIP5, exp: historical, ensemble: r1i1p1}
->
-> preprocessors:
->
->   # See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/preprocessor.html
-    # for a description of the preprocessor functions.
+```yaml
+# ESMValTool
+# recipe_python.yml
+# See https://docs.esmvaltool.org/en/latest/recipes/recipe_examples.html
+# for a description of this recipe.
+# See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/overview.html
+# for a description of the recipe format.
+---
+documentation:
+  description: |
+    Example recipe that plots a map and timeseries of temperature.
 
-    to_degrees_c:
-      convert_units:
-        units: degrees_C
+  title: Recipe that runs an example diagnostic written in Python.
+
+  authors:
+    - andela_bouwe
+    - righi_mattia
+
+  maintainer:
+    - schlund_manuel
+
+  references:
+    - acknow_project
+
+  projects:
+    - esmval
+    - c3s-magic
+
+  datasets:
+    - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn}
+    - {dataset: bcc-csm1-1, version: v1,  project: CMIP5, exp: historical, ensemble: r1i1p1}
+
+preprocessors:
+
+# See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/preprocessor.html
+# for a description of the preprocessor functions.
+
+  to_degrees_c:
+    convert_units:
+      units: degrees_C
     
-    annual_mean_amsterdam:
->     extract_point:
->       latitude: 52.379189
->       longitude: 4.899431
->       scheme: linear
->     annual_statistics:
->       operator: mean
->     multi_model_statistics:
->       statistics:
->         - mean
->       span: overlap
-      convert_units:
-        units: degrees_C
->
->   annual_mean_global:
->     area_statistics:
->       operator: mean
->     annual_statistics:
->       operator: mean
-      convert_units:
-        units: degrees_C
-> 
+  annual_mean_amsterdam:
+    extract_point:
+      latitude: 52.379189
+      longitude: 4.899431
+      scheme: linear
+    annual_statistics:
+      operator: mean
+    multi_model_statistics:
+      statistics:
+        - mean
+      span: overlap
+    convert_units:
+      units: degrees_C
 
-> diagnostics:
->
->   map:
->     description: Global map of temperature in January 2000.
->     themes:
->       - phys
->     realms:
->       - atmos
->     variables:
->       tas:
->         mip: Amon
->         preprocessor: to_degrees_c
->         timerange: 2000/P1M
->         caption: |
->     scripts:
->       script1:
->         script: examples/diagnostic.py
-          quickplot:
-            plot_type: pcolormesh
->         write_netcdf: true
->         output_file_type: pdf
->         quickplot:
->           plot_type: pcolormesh
->           cmap: Reds
->
->   timeseries:
->     description: Annual mean temperature in Amsterdam and global mean since 1850.
->     themes:
->       - phys
->     realms:
->       - atmos
->     variables:
->       tas_amsterdam:
->         short_name: tas
->         mip: Amon
->         preprocessor: annual_mean_amsterdam
->         timerange: 1850/2000
->       tas_global:
->         short_name: tas
->         mip: Amon
->         preprocessor: annual_mean_global
->         timerange: 1850/2000
->     scripts:
->       script1:
->         script: examples/diagnostic.py
->         quickplot:
->           plot_type: plot
-> ```
->
+  annual_mean_global:
+    area_statistics:
+      operator: mean
+    annual_statistics:
+      operator: mean
+    convert_units:
+      units: degrees_C
+
+diagnostics:
+
+  map:
+    description: Global map of temperature in January 2000.
+    themes:
+      - phys
+    realms:
+      - atmos
+    variables:
+      tas:
+        mip: Amon
+        preprocessor: to_degrees_c
+        timerange: 2000/P1M
+        caption: |
+    scripts:
+      script1:
+        script: examples/diagnostic.py
+        quickplot:
+          plot_type: pcolormesh
+          cmap: Reds
+  timeseries:
+    description: Annual mean temperature in Amsterdam and global mean since 1850. 
+    themes:
+      - phys
+    realms:
+      - atmos
+    variables:
+      tas_amsterdam:
+        short_name: tas
+        mip: Amon
+        preprocessor: annual_mean_amsterdam
+        timerange: 1850/2000
+      tas_global:
+        short_name: tas
+        mip: Amon
+        preprocessor: annual_mean_global
+        timerange: 1850/2000
+    scripts:
+      script1:
+        script: examples/diagnostic.py
+        quickplot:
+          plot_type: plot
+```
+
 {: .solution}
 
 ## Keys and values in recipe settings
