@@ -129,6 +129,10 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 > ```yaml
 > # ESMValTool
 > # recipe_python.yml
+  # See https://docs.esmvaltool.org/en/latest/recipes/recipe_examples.html
+  # for a description of this recipe.
+  # See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/overview.html
+  # for a description of the recipe format.
 > ---
 > documentation:
 >   description: |
@@ -152,15 +156,18 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 >
 > datasets:
 >   - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn}
->   - {dataset: CanESM2, project: CMIP5, exp: historical, ensemble: r1i1p1}
+>   - {dataset: bcc-csm1-1, version: v1,  project: CMIP5, exp: historical, ensemble: r1i1p1}
 >
 > preprocessors:
 >
->   select_january:
->     extract_month:
->       month: 1
->
->   annual_mean_amsterdam:
+>   # See https://docs.esmvaltool.org/projects/esmvalcore/en/latest/recipe/preprocessor.html
+    # for a description of the preprocessor functions.
+
+    to_degrees_c:
+      convert_units:
+        units: degrees_C
+    
+    annual_mean_amsterdam:
 >     extract_point:
 >       latitude: 52.379189
 >       longitude: 4.899431
@@ -171,15 +178,18 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 >       statistics:
 >         - mean
 >       span: overlap
+      convert_units:
+        units: degrees_C
 >
 >   annual_mean_global:
 >     area_statistics:
 >       operator: mean
->       fx_variables:
->         areacella:
 >     annual_statistics:
 >       operator: mean
->
+      convert_units:
+        units: degrees_C
+> 
+
 > diagnostics:
 >
 >   map:
@@ -191,12 +201,14 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 >     variables:
 >       tas:
 >         mip: Amon
->         preprocessor: select_january
->         start_year: 2000
->         end_year: 2000
+>         preprocessor: to_degrees_c
+>         timerange: 2000/P1M
+>         caption: |
 >     scripts:
 >       script1:
 >         script: examples/diagnostic.py
+          quickplot:
+            plot_type: pcolormesh
 >         write_netcdf: true
 >         output_file_type: pdf
 >         quickplot:
@@ -214,14 +226,12 @@ and then <kbd>ctrl</kbd> + <kbd>X</kbd> to exit ``nano``.
 >         short_name: tas
 >         mip: Amon
 >         preprocessor: annual_mean_amsterdam
->         start_year: 1850
->         end_year: 2000
+>         timerange: 1850/2000
 >       tas_global:
 >         short_name: tas
 >         mip: Amon
 >         preprocessor: annual_mean_global
->         start_year: 1850
->         end_year: 2000
+>         timerange: 1850/2000
 >     scripts:
 >       script1:
 >         script: examples/diagnostic.py
