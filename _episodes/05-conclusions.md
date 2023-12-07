@@ -79,11 +79,7 @@ If you have a GitHub account, you can check previously created [issues](https://
 Note that you will need a GitHub account for this.
 
 There is also an ESMValTool email list.
-Please see
-
-[information](https://docs.esmvaltool.org/en/latest/introduction.html#user-mailing-list)
-
-on how to subscribe to user mailing list.
+Please see [information](https://docs.esmvaltool.org/en/latest/introduction.html#user-mailing-list) on how to subscribe to user mailing list.
 
 ### What if I find a bug?
 
